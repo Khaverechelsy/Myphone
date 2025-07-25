@@ -33,6 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -57,6 +58,7 @@ fun registerScreen(navController: NavController){
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmpassword by remember { mutableStateOf("") }
+    var fullname by remember { mutableStateOf("") }
     var authViewModel: AuthViewModel = viewModel()
     Box(){
         Image(painter = painterResource(id = R.drawable.background),
@@ -91,10 +93,18 @@ fun registerScreen(navController: NavController){
             leadingIcon = { Icon(Icons.Default.Person, contentDescription = "Person icon")},
             modifier  = Modifier.fillMaxWidth(0.8f))
 
+        OutlinedTextField(value = fullname,
+            onValueChange = {fullname=it},
+            label={Text("Enter fullname")},
+            placeholder ={Text("Please enter fullname ")},
+            leadingIcon = { Icon(Icons.Default.Person, contentDescription = "Person icon")},
+            modifier  = Modifier.fillMaxWidth(0.8f))
+
 
 
         OutlinedTextField(value = email, onValueChange ={email=it},
             label = {Text("Enter Email")},
+            textStyle = TextStyle(Color.Blue),
             placeholder = {Text("Please enter email")},
             leadingIcon = { Icon(Icons.Default.Email, contentDescription = "Email icon")},
             modifier = Modifier.fillMaxWidth(0.8f),
@@ -103,6 +113,7 @@ fun registerScreen(navController: NavController){
         OutlinedTextField(value = password,
             onValueChange = {password=it},
             label={Text("Enter password")},
+            textStyle = TextStyle(Color.Blue),
             placeholder ={Text("Please enter password", color = Color.White, fontWeight = FontWeight.Bold)},
             leadingIcon = { Icon(Icons.Default.Lock, contentDescription = "Password icon")},
             visualTransformation = PasswordVisualTransformation(),
@@ -111,6 +122,7 @@ fun registerScreen(navController: NavController){
 
         OutlinedTextField(value = confirmpassword,
             onValueChange = {confirmpassword=it},
+            textStyle = TextStyle(Color.Blue),
             label={Text("Enter Confirm Password")},
             placeholder ={Text("Please confirm password")},
             leadingIcon = { Icon(Icons.Default.Lock, contentDescription = "Person icon")},
@@ -122,9 +134,9 @@ fun registerScreen(navController: NavController){
         val context = LocalContext.current
 
         Button(onClick = {
-            authViewModel.signup(username = username,email=email,
+            authViewModel.signup(username = username, fullname = fullname, email=email,
                 password=password,confirmpassword=confirmpassword,
-                navController=navController, context = context)
+                navController=navController, context =context)
         },
             colors = ButtonDefaults.buttonColors(Color.Black),
             modifier = Modifier.fillMaxWidth(0.8f))

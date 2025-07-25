@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.KeyboardType
@@ -75,6 +76,7 @@ fun loginScreen(navController: NavController){
             contentScale = ContentScale.Fit)
         OutlinedTextField(value = email, onValueChange ={email=it},
             label = {Text("Enter Email")},
+            textStyle = TextStyle(Color.Blue),
             placeholder = {Text("Please enter email")},
             leadingIcon = { Icon(Icons.Default.Email, contentDescription = "Email icon") },
             modifier = Modifier.fillMaxWidth(0.8f),
